@@ -3,7 +3,7 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const mysql = require ('mysql2');
 const res = require('express/lib/response');
-const {v4:uuidv4} = require ('uuid');
+// const {v4:uuidv4} = require ('uuid');
 
 const app = express();
 
@@ -14,7 +14,7 @@ const db = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'',
-    database:'mohan',
+    database:'register',
     port:3306
 })
 
@@ -47,7 +47,7 @@ app.get('/user',(req,res)=>{
 app.post('/user',(req,res)=>{
     console.log(req.body,'createdata');
 
-    let uniqueId = uuidv4();
+    // let uniqueId = uuidv4();
     let firstName = req.body.firstname;
    
     let lastName = req.body.lastname;
@@ -55,7 +55,7 @@ app.post('/user',(req,res)=>{
     let dOb = req.body.dob;
     let phoneNumber = req.body.phonenumber;
 
-    let qr = `insert into user(uniqueid,firstname,lastname,email,dob,phonenumber)values('${uniqueId}','${firstName}','${lastName}','${eMail}','${dOb}','${phoneNumber}')`;
+    let qr = `insert into user(firstname,lastname,email,dob,phonenumber)values('${firstName}','${lastName}','${eMail}','${dOb}','${phoneNumber}')`;
     console.log(qr,'qr')
     db.query(qr,(err,result)=>{
         
